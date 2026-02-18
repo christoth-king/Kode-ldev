@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ste-Dev - Création de sites vitrines et design infographique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bleu-principal: #2c3e50;
+            --bleu-secondaire: #3498db;
+            --bleu-clair: #e8f4fc;
+            --jaune-principal: #f1c40f;
+            --jaune-secondaire: #f7dc6f;
+            --blanc: #ffffff;
+            --gris-clair: #f8f9fa;
+            --gris-moyen: #ecf0f1;
+            --texte: #333333;
+            --ombre-legere: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            color: var(--texte);
+            line-height: 1.6;
+            background-color: var(--blanc);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--blanc);
+            box-shadow: 0 2px 10px var(--ombre-legere);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            color: var(--bleu-principal);
+            font-size: 1.8rem;
+            margin-left: 10px;
+        }
+        
+        .logo span {
+            color: var(--jaune-principal);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--bleu-principal);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--bleu-secondaire);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--jaune-principal);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--bleu-principal);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(135deg, var(--bleu-clair) 0%, var(--blanc) 100%);
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            color: var(--bleu-principal);
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--bleu-principal);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--jaune-principal);
+            color: var(--bleu-principal);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--jaune-principal);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--bleu-principal);
+        }
+        
+        /* ===== ANIMATION SECTION SERVICES ===== */
+#services {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animation d'apparition */
+.service-card {
+    background: var(--blanc);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    transform: translateY(40px);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+/* Délai d'animation pour effet professionnel */
+.service-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.service-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.service-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* Animation montée douce */
+@keyframes fadeUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Effet hover premium */
+.service-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Icône animée */
+.service-icon {
+    background: linear-gradient(135deg, var(--bleu-secondaire), #5dade2);
+    color: var(--blanc);
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem;
+    transition: all 0.4s ease;
+}
+
+/* Animation icône au survol */
+.service-card:hover .service-icon {
+    transform: rotate(3deg) scale(1.1);
+    background: linear-gradient(135deg, var(--jaune-principal), #f7dc6f);
+    color: var(--bleu-principal);
+}
+
+/* Titre plus pro */
+.service-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+/* Changement couleur au hover */
+.service-card:hover h3 {
+    color: var(--bleu-secondaire);
+}
+
+/* Liste stylisée */
+.service-content ul li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+/* Petit point design */
+.service-content ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--jaune-principal);
+    font-weight: bold;
+}
+
+/* Effet glass subtil (très moderne) */
+.service-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+   
+/* ===== STYLE ANIMÉ SECTION A PROPOS ===== */
+#apropos {
+    overflow: hidden;
+}
+
+/* État initial caché (à gauche) */
+.about-text {
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: all 0.8s ease;
+}
+
+/* Animation des paragraphes */
+.about-text p {
+    transform: translateX(-80px);
+    opacity: 0;
+    transition: all 0.8s ease;
+}
+
+/* Animation des skills */
+.skills {
+    transform: translateX(-120px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+/* Quand la section est survolée */
+#apropos:hover .about-text {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+#apropos:hover .about-text p {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Délai pour effet chic (apparition progressive) */
+#apropos:hover .about-text p:nth-child(1) {
+    transition-delay: 0.2s;
+}
+
+#apropos:hover .about-text p:nth-child(2) {
+    transition-delay: 0.4s;
+}
+
+#apropos:hover .about-text p:nth-child(3) {
+    transition-delay: 0.6s;
+}
+
+#apropos:hover .skills {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: 0.8s;
+}
+
+/* Animation des barres de compétences */
+.skill-level {
+    width: 0 !important;
+    transition: width 1.5s ease;
+}
+
+/* Remplissage animé des barres au survol */
+#apropos:hover .skill-item:nth-child(1) .skill-level {
+    width: 95% !important;
+}
+#apropos:hover .skill-item:nth-child(2) .skill-level {
+    width: 90% !important;
+}
+#apropos:hover .skill-item:nth-child(3) .skill-level {
+    width: 85% !important;
+}
+#apropos:hover .skill-item:nth-child(4) .skill-level {
+    width: 80% !important;
+}
+
+        
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--bleu-principal);
+            color: var(--blanc);
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: var(--jaune-principal);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background-color: var(--bleu-secondaire);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bleu-secondaire);
+            color: var(--blanc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--jaune-principal);
+            color: var(--bleu-principal);
+        }
+        
+        
+        .submit-btn {
+            background-color: var(--jaune-principal);
+            color: var(--bleu-principal);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--jaune-secondaire);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--bleu-principal);
+            color: var(--blanc);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo h3 {
+            color: var(--blanc);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-logo span {
+            color: var(--jaune-principal);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            background: #2c3e5014;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--blanc);
+                flex-direction: column;
+                box-shadow: 0 5px 10px var(--ombre-legere);
+                padding: 20px 0;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 120px 0 60px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .service-content {
+                padding: 20px;
+            }
+        }
+
+        .aera {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    text-decoration: none;
+    z-index: 999;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+}
+
+/* Effet vagues */
+.aera::before,
+.aera::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #25D366;
+    z-index: -1;
+    opacity: 0.6;
+    animation: waves 2s infinite;
+}
+
+/* Décalage de la 2ème vague */
+.aera::after {
+    animation-delay: 1s;
+}
+
+/* Animation */
+@keyframes waves {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* ===== BOUTON THEME ===== */
+#themeBtn {
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(231, 197, 42);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid rgb(236, 196, 17);
+    font-weight: 600;
+}
+
+#themeBtn:hover {
+    opacity: 0.8;
+    background: #ffffff;
+}
+
+/* ===== THEME SOMBRE GLOBAL (TOUT LE SITE) ===== */
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Header */
+body.dark header {
+    background-color: #1a1a1a;
+}
+
+/* Sections */
+body.dark section {
+    background-color: #121212 !important;
+}
+
+/* Cartes services */
+body.dark .service-card {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+/* Texte */
+body.dark p,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark li,
+body.dark a {
+    color: #ffffff !important;
+}
+
+/* Footer */
+body.dark footer {
+    background-color: #000000;
+}
+
+/* Contact box */
+body.dark .contact-info {
+    background-color: #1e1e1e;
+}
+/* HERO en mode sombre */
+body.dark .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+    color: #ffffff;
+}
+
+body.dark .hero h2,
+body.dark .hero p {
+    color: #ffffff;
+}
+
+ 
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-code" style="font-size: 2rem; color: var(--bleu-principal);"></i>
+                <h1>KoDe-L <span>Dev</span></h1>
+            </div>
+        <nav>
+    <ul id="mainNav">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Bouton thème -->
+<button id="themeBtn">Thème</button>
+
+    </header>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="container">
+            <h2>Agence Digitale Créative</h2>
+            <p>koDe-L Dev transforme vos idées en expériences numériques exceptionnelles. Nous créons des sites vitrines percutants et des designs infographiques innovants pour valoriser votre présence en ligne.</p>
+            <a href="#contact" class="cta-button">Discutons de votre projet</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos Services</h2>
+            </div>
+        
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Création de sites vitrines</h3>
+                        <p>Conception et développement de sites web vitrines modernes, responsive et optimisés pour les moteurs de recherche. Votre présence en ligne sera professionnelle et efficace.</p>
+                        <ul>
+                            <li>Sites responsive (adaptés mobiles)</li>
+                            <li>Optimisation SEO</li>
+                            <li>Intégration de contenu</li>
+                            <li>Hébergement et maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Design infographique</h3>
+                        <p>Création de designs visuels percutants pour communiquer vos informations de manière claire et engageante. De la charte graphique aux supports de communication.</p>
+                        <ul>
+                            <li>Identité visuelle complète</li>
+                            <li>Création de logos</li>
+                            <li>Design d'infographies</li>
+                            <li>Supports marketing visuels</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Solutions sur mesure</h3>
+                        <p>Développement de solutions personnalisées adaptées à vos besoins spécifiques. Une approche unique pour chaque projet avec un accompagnement complet.</p>
+                        <ul>
+                            <li>Analyse de vos besoins</li>
+                            <li>Conception sur mesure</li>
+                            <li>Développement spécifique</li>
+                            <li>Formation et support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos">
+        <div class="container">
+            <div class="section-title">
+                <h2>À propos de KoDe-L Dev</h2>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Fondée en 2026, KoDe-L Dev est une agence spécialisée dans la création de sites vitrines et de design infographique. Notre mission est d'accompagner les entreprises et les indépendants dans leur transformation digitale.</p>
+                    <p>Nous combinons expertise technique et créativité pour concevoir des solutions web qui correspondent parfaitement à vos objectifs et à votre identité.</p>
+                    <p>Notre équipe passionnée reste à l'écoute de vos besoins et s'engage à vous fournir un service de qualité, avec un suivi personnalisé tout au long de votre projet.</p>
+                    
+                    <div class="skills">
+                        <div class="skill-item">
+                            <span class="skill-name">Développement Web</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Design Graphique</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Expérience Utilisateur</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                             <span class="skill-name">Optimisation SEO</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contactez-nous</h2>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informations de contact</h3>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Adresse</h4>
+                                <p>cocody<br>Riviera 3 quartier Triangle</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h4>Téléphone</h4>
+                                <p>+225 0502432302 /+225 01923565</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>KoDe-Ldev@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+     <br> 
+     <br>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>KoDe-L <span>Dev</span></h3>
+                    <p>Création de sites vitrines & design infographique</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Liens rapides</h4>
+                    <ul style="list-style: none; margin-top: 10px;">
+                        <li><a href="#accueil" style="color: white; text-decoration: none;">Accueil</a></li>
+                        <li><a href="#services" style="color: white; text-decoration: none;">Services</a></li>
+                        <li><a href="#apropos" style="color: white; text-decoration: none;">À propos</a></li>
+                        <li><a href="#contact" style="color: white; text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-services">
+                    <h4>Nos services</h4>
+                    <ul style="list-style: none; margin-top: 10px;">
+                        <li><a href="#services" style="color: white; text-decoration: none;">Sites vitrines</a></li>
+                        <li><a href="#services" style="color: white; text-decoration: none;">Design infographique</a></li>
+                        <li><a href="#services" style="color: white; text-decoration: none;">Solutions sur mesure</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 Ste-Dev. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+   <a class="aera" 
+        href="https://wa.me/2250576293783?text=Bonjour%20KoDe-L%20Dev,%20je%20suis%20intéressé%20par%20vos%20services" 
+        target="_blank" 
+        aria-label="Contacter Ste-Dev sur WhatsApp">
+
+        <i class="fab fa-whatsapp"></i>
+
+    </a>
+
+        <script>
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", function () {
+    document.body.classList.toggle("dark");
+
+    // Sauvegarde du thème (reste après actualisation)
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+});
+
+// Charger le thème sauvegardé
+window.addEventListener("load", function () {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+    }
+});
+</script>
+<script>
+const cards = document.querySelectorAll('.service-card');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = "running";
+        }
+    });
+}, { threshold: 0.2 });
+
+cards.forEach(card => {
+    card.style.animationPlayState = "paused";
+    observer.observe(card);
+});
+</script>
+
+</body>
+</html>
