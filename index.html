@@ -651,6 +651,94 @@ body.dark .hero h2,
 body.dark .hero p {
     color: #ffffff;
 }
+body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+    }
+
+    /* ===== Hamburger ===== */
+    .hamburger {
+        position: space-between;
+        top: 20px;
+        right: 20px;
+        width: 35px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .hamburger span {
+        display: block;
+        height: 4px;
+        width: 100%;
+        background: #d9b504;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    /* ===== Menu déroulant ===== */
+   .dropdown-menu {
+    position: absolute; /* position par rapport au conteneur du hamburger */
+    top: 40px;          /* juste sous le bouton */
+    right: 0;           /* aligné à droite du bouton */
+    width: 200px;
+    background: #111;
+    color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+    .dropdown-menu.active {
+        max-height: 500px; /* assez grand pour contenir les liens */
+        opacity: 1;
+    }
+
+    .dropdown-menu nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: block;
+    }
+
+    .dropdown-menu nav ul li {
+        border-bottom: 1px solid #333;
+    }
+
+    .dropdown-menu nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-menu nav ul li a {
+        display: block;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: #fff;
+        transition: background 0.3s;
+    }
+
+    .dropdown-menu nav ul li a:hover {
+        background: #6bc4ff;
+    }
+
+    /* ===== Animation hamburger vers croix ===== */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+
 
  
     </style>
@@ -663,15 +751,28 @@ body.dark .hero p {
                 <i class="fas fa-code" style="font-size: 2rem; color: var(--bleu-principal);"></i>
                 <h1>KoDe-L <span>Dev</span></h1>
             </div>
-        <nav>
-    <ul id="mainNav">
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#apropos">À propos</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
 
+<!-- Conteneur du hamburger -->
+    <div style="position: relative;">
+        <!-- Bouton Hamburger -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- Menu déroulant -->
+        <div class="dropdown-menu" id="dropdownMenu">
+            <nav>
+                <ul id="mainNav">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 <!-- Bouton thème -->
 <button id="themeBtn">Thème</button>
 
@@ -824,7 +925,7 @@ body.dark .hero p {
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Email</h4>
-                                <p>KoDe-Ldev@gmail.com</p>
+                                <p>Kodeldev@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -909,6 +1010,7 @@ window.addEventListener("load", function () {
     }
 });
 </script>
+    
 <script>
 const cards = document.querySelectorAll('.service-card');
 
@@ -926,5 +1028,15 @@ cards.forEach(card => {
 });
 </script>
 
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');   // transforme hamburger en croix
+        dropdownMenu.classList.toggle('active'); // ouvre / ferme le menu
+    });
+</script>    
 </body>
 </html>
+
