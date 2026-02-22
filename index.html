@@ -755,65 +755,60 @@ body.dark .hero p {
     transform:scale(1.1);
 }
 
-/* ===== NAV DÉROULANTE ===== */
 .nav-menu{
-    position:absolute;
-    top:70px; /* sous le header */
-    left:0;
-    width:100%;
-    background:#ffffff;
-    box-shadow:0 8px 20px rgba(0, 0, 0, 0.516);
+    position: absolute;
+    top: 0;
+    left: -320px; /* caché à gauche */
+    width: 320px;
+
+    height: auto;
+    max-height: 350px;
+
+    background: #ffffff;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
     z-index: 9999;
-    height: 0;
-    opacity:0;
-    transition:max-height 0.35s ease, opacity 0.3s ease;
+    transition: left 0.4s ease;
 }
 
-/* Menu actif */
+/* Menu ouvert vers la gauche */
 .nav-menu.active{ 
-    opacity:1;
-    height: 100%;           /* prend tout l’espace disponible */
-    min-height: calc(100vh - 70px); /* minimum pour petits écrans */
-    background-color: #ffffff;
-    
+    left: 0;
 }
 
-/* ===== LISTE NAV VERTICALE ===== */
+
 .nav-menu ul{
-    list-style:none;
-    display:flex;
-    flex-direction:column;
-    width:100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+   
 }
 
-/* Liens */
+/* Items */
 .nav-menu li{
-    width:100%;
-    text-align:center;
-    border-bottom:1px solid #b3b1b1; /* ligne grise séparatrice */
-}
-
-.nav-menu li:last-child{
-    border-bottom:none;
+    border: none;
+    text-align: center;
+    width: 100%;
 }
 
 .nav-menu a{
-    display:block;
-    width:100%;
-    padding:18px 10px;
-    text-decoration:none;
-    color:#000;
-    font-size:18px;
-    font-weight:500;
-    transition:background 0.3s, color 0.3s;
+    display: block;
+    padding: 15px 10px;
+    text-decoration: none;
+    color: #000000 !important;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
-.nav-menu a {
-    color: #000 !important;
-}
-
-/* Hover professionnel */
 .nav-menu a:hover{
-    color:#000;
+    background: #f1c40f;
+    
+}
+.nav-menu li:last-child{
+    border-bottom:none;
 }
 
 /* ===== RESPONSIVE PARFAIT (téléphone, tablette) ===== */
@@ -851,7 +846,10 @@ body.dark .hero p {
         padding:20px 0;
     }
 }
-
+.art{
+    text-decoration: none;
+    color: white;
+}
     </style>
 </head>
 <body>
@@ -884,7 +882,6 @@ body.dark .hero p {
     </ul>
 </nav>
 
-    </header>
 
     <!-- Hero Section -->
     <section id="accueil" class="hero">
@@ -1025,7 +1022,10 @@ body.dark .hero p {
                             <i class="fas fa-phone-alt"></i>
                             <div>
                                 <h4>Téléphone</h4>
-                                <p>+225 0502432302 /+225 01923565</p>
+                                <p>
+                                    <a class="art" href="tel:+2250502432302">+225 05 02 43 23 02</a> /
+                                    <a class="art" href="tel:+22501923565">+225 01 92 35 65</a>
+                                </p>
                             </div>
                         </div>
                         
@@ -1033,16 +1033,16 @@ body.dark .hero p {
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Email</h4>
-                                <p>Kodeldev@gmail.com</p>
+                                <p><a class="art" href="mailto:kodeldev@gmail.com?subject=bonjour%20je%20suis%20interessé%20pas%20vos%20services" target="_blank">Kodeldev@gmail.com</a></p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+
+                                <a href="https://www.instagram.com/kodeldev" target="_blank" aria-label="Instagram KoDe-L Dev">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
                     </div>
                 </div>
             
