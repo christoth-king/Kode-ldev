@@ -65,22 +65,54 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
+            gap: 10px;
         }
-        
+        /* Logo par défaut (thème clair) */
+.logo i {
+    color: var(--bleu-principal);
+    transition: color 0.3s;
+}
+
+.logo h1 {
+    color: var(--bleu-principal);
+    transition: color 0.3s;
+}
+
+/* La couleur du <span> dans le h1 */
+.logo h1 span {
+    color: var(--jaune-principal);
+    transition: color 0.3s;
+}
         .logo {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            
         }
         
         .logo h1 {
-            color: var(--bleu-principal);
             font-size: 1.2rem;
-            margin-left: 5px;
+            margin-left: 5px;  
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
         }
         
         .logo span {
             color: var(--jaune-principal);
+             white-space: nowrap;
         }
+        @media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1rem; /* réduit un peu la taille du texte */
+    }
+
+    /* force le span à passer à la ligne */
+    .logo h1 span {
+        display: block; 
+        margin-left: 0; /* supprime le décalage gauche */
+    }
+}
         
         nav ul {
             display: flex;
@@ -635,7 +667,9 @@
 
 /* ===== BOUTON THEME (A DROITE DU HAMBURGER) ===== */
 #themeBtn {
-    position: static; /* on supprime absolute (erreur initiale) */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
     border: none;
     background-color: rgb(231, 197, 42);
     color: rgb(0, 0, 0);
@@ -644,8 +678,9 @@
     border: 2px solid rgb(236, 196, 17);
     font-weight: 600;
     padding: 5px 10px;
-
-    /* reste à gauche, juste après le hamburger */
+    margin-right: 20px;
+    margin-left: 50px;
+    
 }
 
 #themeBtn:hover {
@@ -657,6 +692,19 @@
 body.dark {
     background-color: #121212;
     color: #ffffff;
+}
+/* Dark mode */
+body.dark .logo i {
+    color: #ffffff; /* icône blanche en dark */
+}
+
+
+body.dark .logo h1 {
+    color: #ffffff; /* texte blanc en dark */
+}
+
+body.dark .logo h1 span {
+    color: #f1c40f; /* accent jaune même en dark */
 }
 
 /* Header */
@@ -703,6 +751,31 @@ body.dark .hero h2,
 body.dark .hero p {
     color: #ffffff;
 }
+/* Liens dans le header (desktop) */
+.nav-links li a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+/* Thème clair (par défaut) */
+body:not(.dark) .nav-links li a {
+    color: var(--bleu-principal);
+}
+
+body:not(.dark) .nav-links li a:hover {
+    color: var(--bleu-secondaire);
+}
+
+/* Thème sombre */
+body.dark .nav-links li a {
+    color: #ffffff; /* blanc dans le dark mode */
+}
+
+body.dark .nav-links li a:hover {
+    color: var(--jaune-principal); /* accent color dans le dark mode */
+}
     /* ===== Styles de base ===== */
     body {
         margin: 0;
@@ -718,132 +791,173 @@ body.dark .hero p {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ===== BOUTON HAMBURGER ===== */
-.hamburger{
-    width:25px;
-    height:20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    background:none;
-    border:none;
-    cursor:pointer;
-    padding:0;
-
-    margin-right:10px;
-}
-.hamburger span{
-    display:block;
-    width:100%;
-    height:4px;
-    background: rgb(236, 196, 17);; /* ORANGE */
-    border-radius:3px;
-    transition:all 0.4s ease;
-}
-.hamburger.active span:nth-child(1){
-    transform:rotate(45deg) translate(6px, 6px);
+/* ===== NAVBAR ===== */
+nav{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 30px;
+    height: 60px;
 }
 
-.hamburger.active span:nth-child(2){
-    opacity:0;
-}
-
-.hamburger.active span:nth-child(3){
-    transform:rotate(-45deg) translate(7px, -7px);
-}
-.hamburger:hover{
-    transform:scale(1.1);
-}
-
-.nav-menu{
-    position: absolute;
-    top: 0;
-    left: -320px; /* caché à gauche */
-    width: 320px;
-
-    height: auto;
-    max-height: 350px;
-
-    background: #ffffff;
-    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-    transition: left 0.4s ease;
-}
-
-/* Menu ouvert vers la gauche */
-.nav-menu.active{ 
-    left: 0;
-}
-
-
-.nav-menu ul{
-    list-style: none;
+/* ===== HAMBURGER ===== */
+.menu-icon{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 15px;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    margin-left:  auto;
+}
+.menu-icon span{
+    width: 30px;
+    height: 3px;
+    background: rgb(215, 170, 34);
+    border-radius: 2px;
+    transition: 0.3s ease;
    
 }
 
-/* Items */
-.nav-menu li{
-    border: none;
-    text-align: center;
-    width: 100%;
+/* Animation en croix */
+.menu-icon.active span:nth-child(1){
+    transform: rotate(45deg) translate(5px, 5px);
 }
 
-.nav-menu a{
-    display: block;
-    padding: 15px 10px;
+.menu-icon.active span:nth-child(2){
+    opacity: 0;
+}
+
+.menu-icon.active span:nth-child(3){
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ===== SIDEBAR (MENU GAUCHE) ===== */
+.sidebar{
+    position: absolute;
+    top: 70px;
+    left: -100%;
+    height: auto;
+    width: 80%;
+    max-width: 300px;
+    background: rgba(255, 255, 255, 0.111);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    box-shadow: 10px 0 25px rgba(0,0,0,0.2);
+}
+
+.sidebar.active{
+    left: 0;
+}
+
+.sidebar a{
     text-decoration: none;
-    color: #000000 !important;
-    font-size: 18px;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    padding: 20px 30px;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.sidebar a:hover{
+    background-color: #f0f0f0;
+}
+
+/* ===== TABLETTE ===== */
+@media (min-width: 600px){
+    .sidebar{
+        width: 60%;
+    }
+
+    .sidebar a{
+        font-size: 22px;
+    }
+}
+
+/* ===== GRAND ÉCRAN ===== */
+@media (min-width: 1200px){
+    nav{
+        padding: 0 80px;
+    }
+}
+/* ===== NAVBAR PRO RESPONSIVE ===== */
+.main-nav{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+/* Liens dans le header (desktop) */
+.nav-links{
+    display: none; /* caché sur mobile */
+    list-style: none;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links li a{
+    text-decoration: none;
+    color: var(--bleu-principal);
     font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-.nav-menu a:hover{
-    background: #f1c40f;
-    
-}
-.nav-menu li:last-child{
-    border-bottom:none;
+    font-size: 16px;
+    transition: 0.3s;
 }
 
-/* ===== RESPONSIVE PARFAIT (téléphone, tablette) ===== */
-@media (max-width: 768px){
-    header{
-        height:65px;
-    }
-
-    .nav-menu{
-        top:65px;
-    }
-     .nav-menu.active{
-        height: calc(100vh - 65px);
-    }
-
-}
-/* Petits téléphones (iPhone SE, petits Android) */
-@media (max-width: 480px){
-    header{
-        height:60px;
-    }
-
-    .nav-menu{
-        top:60px;
-    }
-    .nav-menu.active{
-        height: calc(100vh - 60px);
-    }
+.nav-links li a:hover{
+    color: var(--bleu-secondaire);
 }
 
-/* Tablettes larges et Galaxy */
-@media (min-width: 769px) and (max-width: 1024px){
-    .nav-menu a{
-        font-size:19px;
-        padding:20px 0;
+/* ===== MOBILE (par défaut) ===== */
+.menu-icon{
+    display: flex;
+}
+
+/* ===== TABLETTE ===== */
+@media (min-width: 768px){
+    .sidebar{
+        width: 60%;
+    }
+    /* Par défaut (mobile et tablette) */
+.nav-links {
+    display: none; /* on cache la nav sur petit écran */
+}
+.menu-icon {
+    display: flex; /* hamburger visible */
+}
+}
+
+/* ===== GRAND ÉCRAN (CORRECTION PRINCIPALE) ===== */
+@media (min-width: 1024px){
+
+    /* Affiche les liens dans le header */
+    .nav-links{
+        display: flex;
+        gap: 30px;           /* espacement entre les liens */
+        align-items: center;
+       
+    }
+
+    /* Cache le hamburger */
+    .menu-icon{
+        display: none;
+    }
+
+    /* Désactive totalement la sidebar */
+    .sidebar{
+        display: none;
+    }
+
+    /* Header plus équilibré */
+    .nav-container{
+        justify-content: space-between;
     }
 }
 .art{
@@ -853,34 +967,38 @@ body.dark .hero p {
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
     <header>
         <div class="container nav-container">
             <div class="logo">
                 <i class="fas fa-code" style="font-size: 2rem; color: var(--bleu-principal);"></i>
-                <h1>KoDe-L <span>Dev</span></h1>
+                <h1>KoDe-L <span> Dev</span></h1>
             </div>
 
-<button id="themeBtn" aria-label="Changer le thème">
-    <i id="themeIcon" class="fas fa-sun"></i>
-</button>
-         <!-- Bouton Hamburger moderne -->
-<button class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-</button>
-</header>
+            <!-- Bouton thème -->
+            <button id="themeBtn" aria-label="Changer le thème">
+                <i id="themeIcon" class="fas fa-sun"></i>
+            </button>
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
 
-<!-- NAV déroulante verticale -->
-<nav class="nav-menu" id="navMenu">
-    <ul>
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#apropos">À propos</a></li>
-        <li><a href="#contact">Contacts</a></li>
-    </ul>
-</nav>
+                <div class="menu-icon" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+        
+
+            <!-- Sidebar mobile -->
+            <div class="sidebar">
+                <a href="#services">Services</a>
+                <a href="#apropos">À propos</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </header>
 
 
     <!-- Hero Section -->
@@ -1046,8 +1164,6 @@ body.dark .hero p {
                     </div>
                 </div>
             
-                    </form>
-                </div>
             </div>
         </div>
 </section>
@@ -1084,128 +1200,94 @@ body.dark .hero p {
             </div>
             
             <div class="copyright">
-                <p>&copy; 2026 Ste-Dev. Tous droits réservés.</p>
+                <p>&copy; 2026 . Tous droits réservés.</p>
             </div>
         </div>
     </footer>
-   <a class="aera" 
-        href="https://wa.me/2250576293783?text=Bonjour%20KoDe-L%20Dev,%20je%20suis%20intéressé%20par%20vos%20services" 
-        target="_blank" 
-        aria-label="Contacter Ste-Dev sur WhatsApp">
+<a class="aera" 
+    href="https://wa.me/2250576293783?text=Bonjour%20KoDe-L%20Dev,%20je%20suis%20intéressé%20par%20vos%20services" 
+    target="_blank" 
+    aria-label="Contacter Ste-Dev sur WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // === THEME SOMBRE ===
+    const themeBtn = document.getElementById("themeBtn");
+    themeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+        localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    });
 
-        <i class="fab fa-whatsapp"></i>
-
-    </a>
-
-        <script>
-const themeBtn = document.getElementById("themeBtn");
-
-themeBtn.addEventListener("click", function () {
-    document.body.classList.toggle("dark");
-
-    // Sauvegarde du thème (reste après actualisation)
-    if (document.body.classList.contains("dark")) {
-        localStorage.setItem("theme", "dark");
-    } else {
-        localStorage.setItem("theme", "light");
-    }
-});
-
-// Charger le thème sauvegardé
-window.addEventListener("load", function () {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
+    // Charger le thème sauvegardé
+    if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark");
     }
-});
-</script>
 
-<script>
-const cards = document.querySelectorAll('.service-card');
+    // === SIDEBAR / MENU MOBILE ===
+    const sidebar = document.querySelector('.sidebar');
+    const menuIcon = document.querySelector('.menu-icon');
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = "running";
-        }
-    });
-}, { threshold: 0.2 });
-
-cards.forEach(card => {
-    card.style.animationPlayState = "paused";
-    observer.observe(card);
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const hamburger = document.getElementById("hamburger");
-    const navMenu = document.getElementById("navMenu");
-
-    if (hamburger && navMenu) {
-        hamburger.addEventListener("click", function () {
-            navMenu.classList.toggle("active");
-            hamburger.classList.toggle("active");
-        });
+    function toggleMenu() {
+        sidebar.classList.toggle('active');
+        menuIcon.classList.toggle('active');
     }
-});
-</script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+    menuIcon.addEventListener("click", toggleMenu);
+
+    // === ANIMATION SERVICES ===
+    const cards = document.querySelectorAll('.service-card');
+    const servicesObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = "running";
+            }
+        });
+    }, { threshold: 0.2 });
+
+    cards.forEach(card => {
+        card.style.animationPlayState = "paused";
+        servicesObserver.observe(card);
+    });
+
+    // === ANIMATION ABOUT ===
     const aboutElements = document.querySelectorAll("#apropos p, #apropos .skill-item");
-
-    const observerOptions = {
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
+    const aboutObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if(entry.isIntersecting){
                 entry.target.classList.add("appear");
 
-                // Si c'est une barre de compétence, anime le width
+                // Animation des barres de compétence
                 if(entry.target.classList.contains("skill-item")){
                     const level = entry.target.querySelector(".skill-level");
                     if(level){
-                        level.style.width = level.getAttribute("style").match(/width:\s*(\d+)%/)[1] + "%";
+                        const width = level.getAttribute("style").match(/width:\s*(\d+)%/)[1];
+                        level.style.width = width + "%";
                     }
                 }
 
-                // On arrête d'observer cet élément pour que l'animation ne se répète pas
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    aboutElements.forEach(el => observer.observe(el));
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+    aboutElements.forEach(el => aboutObserver.observe(el));
+
+    // === ANIMATION CONTACT ===
     const contactContainer = document.querySelector(".contact-container");
-    const contactItems = document.querySelectorAll(
-        ".contact-info, .contact-item, .social-links a"
-    );
+    const contactItems = document.querySelectorAll(".contact-info, .contact-item, .social-links a");
 
-    const observerOptions = {
-        threshold: 0.2
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
+    const contactObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if(entry.isIntersecting){
-                if(contactContainer){
-                    contactContainer.classList.add("rotate-in");
-                }
-
+                if(contactContainer){ contactContainer.classList.add("rotate-in"); }
                 contactItems.forEach(el => el.classList.add("appear"));
-
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.2 });
 
-    contactItems.forEach(el => observer.observe(el));
+    contactItems.forEach(el => contactObserver.observe(el));
 });
 </script>
 </body>
