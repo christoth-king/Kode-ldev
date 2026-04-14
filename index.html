@@ -1,1299 +1,838 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ste-Dev - Création de sites vitrines et design infographique</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bleu-principal: #2c3e50;
-            --bleu-secondaire: #3498db;
-            --bleu-clair: #e8f4fc;
-            --jaune-principal: #f1c40f;
-            --jaune-secondaire: #f7dc6f;
-            --blanc: #ffffff;
-            --gris-clair: #f8f9fa;
-            --gris-moyen: #ecf0f1;
-            --texte: #333333;
-            --ombre-legere: rgba(0, 0, 0, 0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            color: var(--texte);
-            line-height: 1.6;
-            background-color: var(--blanc);
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header & Navigation */
-        header {
-            background-color: var(--blanc);
-            box-shadow: 0 2px 10px var(--ombre-legere);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-
-            height:70px;
-            display:flex;
-            align-items:center;
-            justify-content:flex-start; /* tout à gauche */
-            padding:0 15px;
-            position:relative;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            gap: 10px;
-        }
-        /* Logo par défaut (thème clair) */
-.logo i {
-    color: var(--bleu-principal);
-    transition: color 0.3s;
-}
-
-.logo h1 {
-    color: var(--bleu-principal);
-    transition: color 0.3s;
-}
-
-/* La couleur du <span> dans le h1 */
-.logo h1 span {
-    color: var(--jaune-principal);
-    transition: color 0.3s;
-}
-        .logo {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            
-        }
-        
-        .logo h1 {
-            font-size: 1.2rem;
-            margin-left: 5px;  
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-        
-        .logo span {
-            color: var(--jaune-principal);
-             white-space: nowrap;
-        }
-        @media (max-width: 480px) {
-    .logo h1 {
-        font-size: 1rem; /* réduit un peu la taille du texte */
-    }
-
-    /* force le span à passer à la ligne */
-    .logo h1 span {
-        display: block; 
-        margin-left: 0; /* supprime le décalage gauche */
-    }
-}
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: var(--bleu-principal);
-            font-weight: 600;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        nav ul li a:hover {
-            color: var(--bleu-secondaire);
-        }
-        
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--jaune-principal);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s;
-        }
-        
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--bleu-principal);
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 150px 0 80px;
-            background: linear-gradient(135deg, var(--bleu-clair) 0%, var(--blanc) 100%);
-            text-align: center;
-        }
-        
-        .hero h2 {
-            font-size: 2.8rem;
-            color: var(--bleu-principal);
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--bleu-principal);
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: var(--jaune-principal);
-            color: var(--bleu-principal);
-            padding: 12px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            border: 2px solid var(--jaune-principal);
-        }
-        
-        .cta-button:hover {
-            background-color: transparent;
-            color: var(--bleu-principal);
-        }
-        
-        /* ===== ANIMATION SECTION SERVICES ===== */
-#services {
-    position: relative;
-    overflow: hidden;
-}
-
-/* Animation d'apparition */
-.service-card {
-    background: var(--blanc);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s ease;
-    transform: translateY(40px);
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards;
-}
-
-/* Délai d'animation pour effet professionnel */
-.service-card:nth-child(1) {
-    animation-delay: 0.2s;
-}
-.service-card:nth-child(2) {
-    animation-delay: 0.4s;
-}
-.service-card:nth-child(3) {
-    animation-delay: 0.6s;
-}
-
-/* Animation montée douce */
-@keyframes fadeUp {
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Effet hover premium */
-.service-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-}
-
-/* Icône animée */
-.service-icon {
-    background: linear-gradient(135deg, var(--bleu-secondaire), #5dade2);
-    color: var(--blanc);
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.8rem;
-    transition: all 0.4s ease;
-}
-
-/* Animation icône au survol */
-.service-card:hover .service-icon {
-    transform: rotate(3deg) scale(1.1);
-    background: linear-gradient(135deg, var(--jaune-principal), #f7dc6f);
-    color: var(--bleu-principal);
-}
-
-/* Titre plus pro */
-.service-content h3 {
-    font-size: 1.6rem;
-    margin-bottom: 15px;
-    transition: color 0.3s ease;
-}
-
-/* Changement couleur au hover */
-.service-card:hover h3 {
-    color: var(--bleu-secondaire);
-}
-/* Supprimer les points dans la liste services */
-.service-content ul {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 0;
-} 
-
-/* Liste stylisée */
-.service-content ul li {
-    margin-bottom: 8px;
-    position: relative;
-    padding-left: 20px;
-}
-
-/* Petit point design */
-.service-content ul li::before {
-    content: "✔";
-    position: absolute;
-    left: 0;
-    color: var(--jaune-principal);
-    font-weight: bold;
-}
-
-/* Effet glass subtil (très moderne) */
-.service-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-    );
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.service-card:hover::before {
-    opacity: 1;
-}
-   
-/* ===== ABOUT SECTION ===== */
-#apropos {
-    padding: 80px 20px;
-    background: #f9f9f9;
-}
-
-.section-title h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 40px;
-    color: #111;
-}
-
-/* About Content */
-.about-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-/* Texte de la section */
-.about-text p {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: #333;
-    margin-bottom: 15px;
-
-    opacity: 0;
-    transform: translateY(50px); /* départ en bas */
-    transition: all 0.7s ease-out;
-}
-
-/* Compétences */
-.skills {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.skill-item {
-    opacity: 0;
-    transform: translateY(50px); /* départ en bas */
-    transition: all 0.7s ease-out;
-}
-
-.skill-name {
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #111;
-}
-
-.skill-bar {
-    width: 100%;
-    height: 10px;
-    background: #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.skill-level {
-    height: 100%;
-    background: #f4b400; /* couleur barre compétence */
-    width: 0;
-    border-radius: 5px;
-    transition: width 1s ease-out;
-}
-
-/* ===== CLASSE ACTIVE POUR ANIMATION ===== */
-.appear {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-        
-    /* ===== Contact Section ===== */
-.contact-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-
-    /* Animation de rotation */
-    transform: rotate(0deg) translateY(50px);
-    opacity: 0;
-    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-}
-
-/* Container départ */
-.contact-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    transform: translateY(50px) rotate(5deg);
-    
-    opacity: 0;
-    transition: opacity 0.8s ease-out;
-}
-
-/* Animation apparition + rotation puis retour */
-.contact-container.rotate-in {
-    opacity: 1;
-    animation: rotateEffect 0.8s ease-out forwards;
-}
-
-/* Keyframes : rotation + retour */
-@keyframes rotateEffect {
-    0% {
-        transform: translateY(50px) rotate(0deg);
-    }
-    40% {
-        transform: translateY(0) rotate(5deg);
-    }
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-}
-
-.contact-info {
-    flex: 1;
-    min-width: 300px;
-    background-color: var(--bleu-principal);
-    color: var(--blanc);
-    padding: 30px;
-    border-radius: 8px;
-
-    /* Animation apparition individuelle */
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.7s ease-out;
-}
-
-.contact-info.appear {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.contact-info h3 {
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-    color: var(--jaune-principal);
-
-}
-
-.contact-details {
-    margin-bottom: 30px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.7s ease-out;
-}
-
-.contact-item.appear {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.contact-item i {
-    width: 40px;
-    height: 40px;
-    background-color: var(--bleu-secondaire);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-}
-
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.social-links a {
-    display: inline-flex;
-    width: 40px;
-    height: 40px;
-    background-color: var(--bleu-secondaire);
-    color: var(--blanc);
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.7s ease-out, background-color 0.3s;
-}
-
-.social-links a.appear {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.social-links a:hover {
-    background-color: var(--jaune-principal);
-    color: var(--bleu-principal);
-}
-        
-        
-        /* Footer */
-        footer {
-            background-color: var(--bleu-principal);
-            color: var(--blanc);
-            padding: 40px 0 20px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-        
-        .footer-logo h3 {
-            color: var(--blanc);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-        
-        .footer-logo span {
-            color: var(--jaune-principal);
-        }
-        
-        .copyright {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            background: #2c3e5014;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero h2 {
-                font-size: 2.3rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--blanc);
-                flex-direction: column;
-                box-shadow: 0 5px 10px var(--ombre-legere);
-                padding: 20px 0;
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                text-align: center;
-                padding: 10px 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero {
-                padding: 120px 0 60px;
-            }
-            
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            section {
-                padding: 60px 0;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.6rem;
-            }
-            
-            .service-content {
-                padding: 20px;
-            }
-        }
-
-        .aera {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #25D366;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    text-decoration: none;
-    z-index: 999;
-    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
-}
-
-/* Effet vagues */
-.aera::before,
-.aera::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #25D366;
-    z-index: -1;
-    opacity: 0.6;
-    animation: waves 2s infinite;
-}
-
-/* Décalage de la 2ème vague */
-.aera::after {
-    animation-delay: 1s;
-}
-
-/* Animation */
-@keyframes waves {
-    0% {
-        transform: scale(1);
-        opacity: 0.6;
-    }
-    100% {
-        transform: scale(2.5);
-        opacity: 0;
-    }
-}
-
-/* ===== BOUTON THEME (A DROITE DU HAMBURGER) ===== */
-#themeBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    border: none;
-    background-color: rgb(231, 197, 42);
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    border-radius: 5px;
-    border: 2px solid rgb(236, 196, 17);
-    font-weight: 600;
-    padding: 5px 10px;
-    margin-right: 20px;
-    margin-left: 50px;
-    
-}
-
-#themeBtn:hover {
-    opacity: 0.8;
-    background: #eceaeab0;
-}
-
-/* ===== THEME SOMBRE GLOBAL (TOUT LE SITE) ===== */
-body.dark {
-    background-color: #121212;
-    color: #ffffff;
-}
-/* Dark mode */
-body.dark .logo i {
-    color: #ffffff; /* icône blanche en dark */
-}
-
-
-body.dark .logo h1 {
-    color: #ffffff; /* texte blanc en dark */
-}
-
-body.dark .logo h1 span {
-    color: #f1c40f; /* accent jaune même en dark */
-}
-
-/* Header */
-body.dark header {
-    background-color: #1a1a1a;
-}
-/* Sections */
-body.dark section {
-    background-color: #121212 !important;
-}
-
-/* Cartes services */
-body.dark .service-card {
-    background-color: #1e1e1e;
-    color: #ffffff;
-}
-
-/* Texte */
-body.dark p,
-body.dark h1,
-body.dark h2,
-body.dark h3,
-body.dark h4,
-body.dark li {
-    color: #ffffff !important;
-}
-
-/* Footer */
-body.dark footer {
-    background-color: #000000;
-}
-
-/* Contact box */
-body.dark .contact-info {
-    background-color: #1e1e1e;
-}
-/* HERO en mode sombre */
-body.dark .hero {
-    background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
-    color: #ffffff;
-}
-
-body.dark .hero h2,
-body.dark .hero p {
-    color: #ffffff;
-}
-/* Liens dans le header (desktop) */
-.nav-links li a {
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-/* Thème clair (par défaut) */
-body:not(.dark) .nav-links li a {
-    color: var(--bleu-principal);
-}
-
-body:not(.dark) .nav-links li a:hover {
-    color: var(--bleu-secondaire);
-}
-
-/* Thème sombre */
-body.dark .nav-links li a {
-    color: #ffffff; /* blanc dans le dark mode */
-}
-
-body.dark .nav-links li a:hover {
-    color: var(--jaune-principal); /* accent color dans le dark mode */
-}
-    /* ===== Styles de base ===== */
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f5f5f5;
-    }
-
-  /* ===== RESET PRO ===== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KoDe-L Dev — Agence Digitale Créative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #0a0f1e;
+  --accent: #f59e0b;
+  --accent-light: #fef3c7;
+  --accent-dark: #d97706;
+  --blue: #3b82f6;
+  --blue-light: #eff6ff;
+  --green: #22c55e;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-400: #94a3b8;
+  --gray-600: #475569;
+  --gray-800: #1e293b;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,.12);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--primary);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+h3 { font-size: 1.15rem; }
+p { color: var(--gray-600); line-height: 1.75; }
+
+/* ===== LAYOUT ===== */
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+section { padding: 96px 0; }
+
+/* ===== UTILITIES ===== */
+.section-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-light); color: var(--accent-dark);
+  font-family: var(--font-display); font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .1em;
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
+}
+.section-tag::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: var(--primary);
+  font-family: var(--font-display); font-size: 14px; font-weight: 600;
+  padding: 12px 24px; border-radius: var(--radius-sm);
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--primary);
+  font-family: var(--font-display); font-size: 14px; font-weight: 600;
+  padding: 12px 24px; border-radius: var(--radius-sm);
+  text-decoration: none; border: 1.5px solid var(--gray-200);
+  transition: border-color .2s, background .2s;
+}
+.btn-secondary:hover { border-color: var(--gray-400); background: var(--gray-50); }
 
 /* ===== NAVBAR ===== */
-nav{
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 30px;
-    height: 60px;
+header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--gray-100);
+  transition: box-shadow .3s;
+}
+header.scrolled { box-shadow: var(--shadow-md); }
+
+.nav-container {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px;
 }
 
-/* ===== HAMBURGER ===== */
-.menu-icon{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    cursor: pointer;
-    height: 40px;
-    width: 40px;
-    margin-left:  auto;
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-icon {
+  width: 36px; height: 36px; background: var(--primary);
+  border-radius: 9px; display: flex; align-items: center; justify-content: center;
 }
-.menu-icon span{
-    width: 30px;
-    height: 3px;
-    background: rgb(215, 170, 34);
-    border-radius: 2px;
-    transition: 0.3s ease;
-   
+.nav-logo-icon i { color: var(--accent); font-size: 14px; }
+.nav-logo-text { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--primary); }
+.nav-logo-text span { color: var(--accent); }
+
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+.nav-links a {
+  font-family: var(--font-display); font-size: 14px; font-weight: 500;
+  color: var(--gray-600); text-decoration: none; transition: color .2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 2px; background: var(--accent); border-radius: 2px;
+  transition: width .25s;
+}
+.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta { margin-left: 8px; }
+
+/* Mobile nav */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  width: 24px; height: 2px; background: var(--primary);
+  border-radius: 2px; transition: .3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.mobile-menu {
+  display: none; position: fixed; top: 68px; left: 0; right: 0;
+  background: var(--white); border-bottom: 1px solid var(--gray-100);
+  padding: 20px 24px; box-shadow: var(--shadow-md); z-index: 999;
+}
+.mobile-menu.open { display: block; }
+.mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.mobile-menu ul li a {
+  display: block; padding: 12px 16px; font-family: var(--font-display);
+  font-size: 15px; font-weight: 500; color: var(--primary); text-decoration: none;
+  border-radius: var(--radius-sm); transition: background .2s;
+}
+.mobile-menu ul li a:hover { background: var(--gray-50); }
+.mobile-menu .mobile-cta { margin-top: 12px; width: 100%; justify-content: center; }
+
+/* ===== HERO ===== */
+.hero {
+  padding: 148px 0 96px;
+  background: linear-gradient(160deg, #fafbff 0%, #ffffff 60%, #fffbeb 100%);
+  position: relative; overflow: hidden;
 }
 
-/* Animation en croix */
-.menu-icon.active span:nth-child(1){
-    transform: rotate(45deg) translate(5px, 5px);
+.hero-bg-shape {
+  position: absolute; width: 600px; height: 600px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(245,158,11,.07) 0%, transparent 70%);
+  top: -100px; right: -100px; pointer-events: none;
+}
+.hero-bg-shape2 {
+  position: absolute; width: 400px; height: 400px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(59,130,246,.05) 0%, transparent 70%);
+  bottom: 0; left: -80px; pointer-events: none;
 }
 
-.menu-icon.active span:nth-child(2){
-    opacity: 0;
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
 }
 
-.menu-icon.active span:nth-child(3){
-    transform: rotate(-45deg) translate(6px, -6px);
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white); border: 1.5px solid var(--gray-200);
+  border-radius: 20px; padding: 6px 14px; margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+.badge-text { font-size: 12px; font-weight: 500; color: var(--gray-600); }
+
+@keyframes pulse {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,.4); }
+  50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
 }
 
-/* ===== SIDEBAR (MENU GAUCHE) ===== */
-.sidebar{
-    position: absolute;
-    top: 70px;
-    left: -100%;
-    height: auto;
-    width: 80%;
-    max-width: 300px;
-    background: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
-    transition: left 0.3s ease;
-    z-index: 1000;
-    box-shadow: 10px 0 25px rgba(0,0,0,0.2);
+.hero h1 { margin-bottom: 20px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero > .container > .hero-inner > .hero-content > p { font-size: 17px; max-width: 440px; margin-bottom: 36px; }
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.hero-visual {
+  background: var(--gray-50); border-radius: var(--radius-xl);
+  border: 1.5px solid var(--gray-200); padding: 28px;
+  box-shadow: var(--shadow-lg);
+}
+.browser-dots { display: flex; gap: 6px; margin-bottom: 20px; }
+.browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+.ui-mockup { display: flex; flex-direction: column; gap: 14px; }
+.ui-row { display: flex; gap: 12px; }
+.ui-block {
+  border-radius: var(--radius-md); padding: 16px;
+  background: var(--white); border: 1px solid var(--gray-200); flex: 1;
+}
+.ui-block.accent { background: var(--accent-light); border-color: #fcd34d; }
+.ui-block.dark { background: var(--primary); border-color: var(--primary); }
+.ui-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); margin-bottom: 8px; }
+.ui-block.accent .ui-label { color: var(--accent-dark); }
+.ui-block.dark .ui-label { color: rgba(255,255,255,.4); }
+.ui-bar { height: 8px; border-radius: 4px; background: var(--gray-200); }
+.ui-bar.filled { background: var(--accent); }
+.ui-bar.half { width: 60%; }
+.ui-bar.third { width: 35%; }
+.ui-num { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+.ui-block.dark .ui-num { color: var(--accent); }
+.ui-sub { font-size: 11px; color: var(--gray-400); }
+.ui-block.dark .ui-sub { color: rgba(255,255,255,.45); }
+
+/* ===== STATS BAR ===== */
+.stats-bar {
+  background: var(--primary); padding: 32px 0;
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+}
+.stat-item {
+  text-align: center; padding: 16px 24px;
+  border-right: 1px solid rgba(255,255,255,.1);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--font-display); font-size: 2.4rem; font-weight: 700;
+  color: var(--accent); display: block; margin-bottom: 4px;
+}
+.stat-label { font-size: 13px; color: rgba(255,255,255,.55); }
+
+/* ===== SERVICES ===== */
+#services { background: var(--gray-50); }
+
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 48px;
 }
 
-.sidebar.active{
-    left: 0;
+.service-card {
+  background: var(--white); border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg); padding: 32px;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform .35s;
+}
+.service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--gray-100); }
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  width: 52px; height: 52px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 20px;
+}
+.icon-web { background: var(--blue-light); color: var(--blue); }
+.icon-design { background: var(--accent-light); color: var(--accent-dark); }
+.icon-custom { background: #f0fdf4; color: #16a34a; }
+
+.service-card h3 { font-size: 1.1rem; margin-bottom: 12px; color: var(--primary); }
+.service-card > p { font-size: 14px; margin-bottom: 20px; }
+.service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 11px; font-weight: 500; padding: 4px 10px;
+  border-radius: 20px; background: var(--gray-100); color: var(--gray-600);
+  border: 1px solid var(--gray-200);
 }
 
-.sidebar a{
-    text-decoration: none;
-    color: black;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
-    padding: 20px 30px;
-    width: 100%;
-    transition: 0.2s;
+/* ===== ABOUT ===== */
+#apropos { background: var(--white); }
+
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start;
 }
 
-.sidebar a:hover{
-    background-color: #f0f0f0;
+.about-text p { margin-bottom: 16px; font-size: 15px; }
+
+.skills { margin-top: 36px; display: flex; flex-direction: column; gap: 20px; }
+.skill-row {}
+.skill-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.skill-name { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--primary); }
+.skill-pct { font-size: 12px; color: var(--gray-400); font-weight: 500; }
+.skill-track {
+  height: 5px; background: var(--gray-100); border-radius: 3px; overflow: hidden;
+}
+.skill-fill {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  border-radius: 3px; width: 0;
+  transition: width 1.4s cubic-bezier(.22,1,.36,1);
 }
 
-/* ===== TABLETTE ===== */
-@media (min-width: 600px){
-    .sidebar{
-        width: 60%;
-    }
+.about-aside { display: flex; flex-direction: column; gap: 16px; }
 
-    .sidebar a{
-        font-size: 22px;
-    }
+.about-featured {
+  background: var(--primary); border-radius: var(--radius-lg);
+  padding: 32px; color: var(--white);
+}
+.af-badge {
+  display: inline-block; background: var(--accent); color: var(--primary);
+  font-size: 11px; font-weight: 700; padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 16px;
+  font-family: var(--font-display); text-transform: uppercase; letter-spacing: .06em;
+}
+.about-featured h3 { color: var(--white); font-size: 1.2rem; margin-bottom: 10px; }
+.about-featured p { color: rgba(255,255,255,.6); font-size: 14px; }
+
+.about-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.about-stat {
+  background: var(--gray-50); border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md); padding: 20px 16px; text-align: center;
+}
+.about-stat-num {
+  font-family: var(--font-display); font-size: 1.8rem; font-weight: 700;
+  color: var(--accent); display: block; margin-bottom: 4px;
+}
+.about-stat-label { font-size: 12px; color: var(--gray-400); }
+
+/* ===== CONTACT ===== */
+#contact { background: var(--gray-50); }
+
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
 }
 
-/* ===== GRAND ÉCRAN ===== */
-@media (min-width: 1200px){
-    nav{
-        padding: 0 80px;
-    }
+.contact-info-items { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; }
+.contact-item-row { display: flex; align-items: flex-start; gap: 14px; }
+.contact-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  background: var(--white); border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
+  color: var(--accent); font-size: 15px;
 }
-/* ===== NAVBAR PRO RESPONSIVE ===== */
-.main-nav{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 20px;
+.contact-item-row h4 {
+  font-family: var(--font-display); font-size: 13px; font-weight: 600;
+  color: var(--primary); margin-bottom: 3px;
+}
+.contact-item-row a, .contact-item-row p {
+  font-size: 14px; color: var(--gray-600); text-decoration: none;
+}
+.contact-item-row a:hover { color: var(--accent); }
+
+.social-links { display: flex; gap: 10px; margin-top: 32px; }
+.social-btn {
+  width: 40px; height: 40px; border-radius: var(--radius-sm);
+  background: var(--white); border: 1.5px solid var(--gray-200);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray-600); text-decoration: none; font-size: 15px;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.social-btn:hover { background: var(--accent); color: var(--primary); border-color: var(--accent); }
+
+/* Contact Form */
+.contact-form {
+  background: var(--white); border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg); padding: 36px;
+}
+.contact-form h3 { font-size: 1.1rem; margin-bottom: 24px; color: var(--primary); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.form-label { font-size: 12px; font-weight: 600; color: var(--primary); font-family: var(--font-display); }
+.form-input, .form-textarea {
+  background: var(--gray-50); border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm); padding: 10px 14px;
+  font-family: var(--font-body); font-size: 14px; color: var(--primary);
+  transition: border-color .2s, box-shadow .2s; outline: none; width: 100%;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--gray-400); }
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245,158,11,.12);
+}
+.form-textarea { min-height: 100px; resize: vertical; }
+.form-submit { width: 100%; justify-content: center; margin-top: 4px; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--primary); padding: 56px 0 32px;
 }
 
-/* Liens dans le header (desktop) */
-.nav-links{
-    display: none; /* caché sur mobile */
-    list-style: none;
-    align-items: center;
-    gap: 30px;
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+  padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 32px;
 }
 
-.nav-links li a{
-    text-decoration: none;
-    color: var(--bleu-principal);
-    font-weight: 600;
-    font-size: 16px;
-    transition: 0.3s;
+.footer-brand {}
+.footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; text-decoration: none; }
+.footer-logo-icon {
+  width: 36px; height: 36px; background: rgba(255,255,255,.08);
+  border-radius: 9px; display: flex; align-items: center; justify-content: center;
 }
+.footer-logo-icon i { color: var(--accent); font-size: 14px; }
+.footer-logo span { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--white); }
+.footer-logo span b { color: var(--accent); font-weight: 700; }
+.footer-brand p { font-size: 13px; color: rgba(255,255,255,.45); max-width: 220px; line-height: 1.7; }
 
-.nav-links li a:hover{
-    color: var(--bleu-secondaire);
+.footer-col h4 {
+  font-family: var(--font-display); font-size: 13px; font-weight: 600;
+  color: var(--white); margin-bottom: 16px; text-transform: uppercase; letter-spacing: .06em;
 }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
+.footer-col ul li a:hover { color: var(--accent); }
 
-/* ===== MOBILE (par défaut) ===== */
-.menu-icon{
-    display: flex;
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
 }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,.3); text-decoration: none; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,.6); }
 
-/* ===== TABLETTE ===== */
-@media (min-width: 768px){
-    .sidebar{
-        width: 60%;
-    }
-    /* Par défaut (mobile et tablette) */
-.nav-links {
-    display: none; /* on cache la nav sur petit écran */
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
 }
-.menu-icon {
-    display: flex; /* hamburger visible */
+@media (max-width: 768px) {
+  section { padding: 64px 0; }
+  .hero { padding: 120px 0 64px; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .stat-item:last-child { border-bottom: none; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
 }
+@media (max-width: 576px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .hero-actions { flex-direction: column; }
+  .btn-primary, .btn-secondary { justify-content: center; text-align: center; }
+  .about-stats-grid { grid-template-columns: 1fr 1fr; }
 }
-
-/* ===== GRAND ÉCRAN (CORRECTION PRINCIPALE) ===== */
-@media (min-width: 1024px){
-
-    /* Affiche les liens dans le header */
-    .nav-links{
-        display: flex;
-        gap: 30px;           /* espacement entre les liens */
-        align-items: center;
-       
-    }
-
-    /* Cache le hamburger */
-    .menu-icon{
-        display: none;
-    }
-
-    /* Désactive totalement la sidebar */
-    .sidebar{
-        display: none;
-    }
-
-    /* Header plus équilibré */
-    .nav-container{
-        justify-content: space-between;
-    }
-}
-.art{
-    text-decoration: none;
-    color: white;
-}
-    </style>
+</style>
 </head>
 <body>
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-code" style="font-size: 2rem; color: var(--bleu-principal);"></i>
-                <h1>KoDe-L <span> Dev</span></h1>
-            </div>
 
-            <!-- Bouton thème -->
-            <button id="themeBtn" aria-label="Changer le thème">
-                <i id="themeIcon" class="fas fa-sun"></i>
-            </button>
-                <ul class="nav-links">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#apropos">À propos</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+<!-- HEADER -->
+<header id="header">
+  <div class="container nav-container">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon"><i class="fas fa-code"></i></div>
+      <span class="nav-logo-text">KoDe-L <span>Dev</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn-primary nav-cta">Démarrer un projet</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
 
-                <div class="menu-icon" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-        
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#services" class="mobile-link">Services</a></li>
+    <li><a href="#apropos" class="mobile-link">À propos</a></li>
+    <li><a href="#contact" class="mobile-link">Contact</a></li>
+  </ul>
+  <a href="#contact" class="btn-primary mobile-cta mobile-link">Démarrer un projet</a>
+</div>
 
-            <!-- Sidebar mobile -->
-            <div class="sidebar">
-                <a href="#services">Services</a>
-                <a href="#apropos">À propos</a>
-                <a href="#contact">Contact</a>
-            </div>
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-shape2"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          <span class="badge-text">Agence disponible pour nouveaux projets</span>
         </div>
-    </header>
-
-
-    <!-- Hero Section -->
-    <section id="accueil" class="hero">
-        <div class="container">
-            <h2>Agence Digitale Créative</h2>
-            <p>koDe-L Dev transforme vos idées en expériences numériques exceptionnelles. Nous créons des sites vitrines percutants et des designs infographiques innovants pour valoriser votre présence en ligne.</p>
-            <a href="#contact" class="cta-button">Discutons de votre projet</a>
+        <h1>Votre présence digitale,<br><em>repensée de A à Z</em></h1>
+        <p>KoDe-L Dev transforme vos idées en expériences numériques exceptionnelles. Sites vitrines percutants & designs infographiques innovants.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary"><i class="fas fa-arrow-right"></i> Discuter de votre projet</a>
+          <a href="#services" class="btn-secondary">Voir nos services</a>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Nos Services</h2>
-            </div>
-        
-            <div class="services-grid">
-                <!-- Service 1 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Création de sites vitrines</h3>
-                        <p>Conception et développement de sites web vitrines modernes, responsive et optimisés pour les moteurs de recherche. Votre présence en ligne sera professionnelle et efficace.</p>
-                        <ul>
-                            <li>Sites responsive (adaptés mobiles)</li>
-                            <li>Optimisation SEO</li>
-                            <li>Intégration de contenu</li>
-                            <li>Hébergement et maintenance</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Design infographique</h3>
-                        <p>Création de designs visuels percutants pour communiquer vos informations de manière claire et engageante. De la charte graphique aux supports de communication.</p>
-                        <ul>
-                            <li>Identité visuelle complète</li>
-                            <li>Création de logos</li>
-                            <li>Design d'infographies</li>
-                            <li>Supports marketing visuels</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Solutions sur mesure</h3>
-                        <p>Développement de solutions personnalisées adaptées à vos besoins spécifiques. Une approche unique pour chaque projet avec un accompagnement complet.</p>
-                        <ul>
-                            <li>Analyse de vos besoins</li>
-                            <li>Conception sur mesure</li>
-                            <li>Développement spécifique</li>
-                            <li>Formation et support</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="hero-visual">
+        <div class="browser-dots">
+          <div class="browser-dot" style="background:#ef4444"></div>
+          <div class="browser-dot" style="background:#f59e0b"></div>
+          <div class="browser-dot" style="background:#22c55e"></div>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="apropos">
-        <div class="container">
-            <div class="section-title">
-                <h2>À propos de KoDe-L Dev</h2>
+        <div class="ui-mockup">
+          <div class="ui-row">
+            <div class="ui-block accent">
+              <div class="ui-label">Trafic mensuel</div>
+              <div class="ui-num">12.4K</div>
+              <div class="ui-sub">+24% ce mois</div>
             </div>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Fondée en 2026, KoDe-L Dev est une agence spécialisée dans la création de sites vitrines et de design infographique. Notre mission est d'accompagner les entreprises et les indépendants dans leur transformation digitale.</p>
-                    <p>Nous combinons expertise technique et créativité pour concevoir des solutions web qui correspondent parfaitement à vos objectifs et à votre identité.</p>
-                    <p>Notre équipe passionnée reste à l'écoute de vos besoins et s'engage à vous fournir un service de qualité, avec un suivi personnalisé tout au long de votre projet.</p>
-                    
-                    <div class="skills">
-                        <div class="skill-item">
-                            <span class="skill-name">Développement Web</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Design Graphique</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Expérience Utilisateur</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                             <span class="skill-name">Optimisation SEO</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="ui-block dark">
+              <div class="ui-label">Projets actifs</div>
+              <div class="ui-num">8</div>
+              <div class="ui-sub">En cours</div>
             </div>
+          </div>
+          <div class="ui-block">
+            <div class="ui-label">Performance SEO</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+              <div class="ui-bar filled" style="width:92%"></div>
+              <div class="ui-bar" style="width:100%;background:#f59e0b;opacity:.35"></div>
+              <div class="ui-bar half"></div>
+            </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-<section id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contactez-nous</h2>
-            </div>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Informations de contact</h3>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Adresse</h4>
-                                <p>cocody<br>Riviera 3 quartier Triangle</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <h4>Téléphone</h4>
-                                <p>
-                                    <a class="art" href="tel:+2250502432302">+225 05 02 43 23 02</a> /
-                                    <a class="art" href="tel:+22501923565">+225 01 92 35 65</a>
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p><a class="art" href="mailto:kodeldev@gmail.com?subject=bonjour%20je%20suis%20interessé%20pas%20vos%20services" target="_blank">Kodeldev@gmail.com</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="social-links">
-
-                                <a href="https://www.instagram.com/kodeldev" target="_blank" aria-label="Instagram KoDe-L Dev">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-     <br> 
-     <br>
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h3>KoDe-L <span>Dev</span></h3>
-                    <p>Création de sites vitrines & design infographique</p>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Liens rapides</h4>
-                    <ul style="list-style: none; margin-top: 10px;">
-                        <li><a href="#accueil" style="color: white; text-decoration: none;">Accueil</a></li>
-                        <li><a href="#services" style="color: white; text-decoration: none;">Services</a></li>
-                        <li><a href="#apropos" style="color: white; text-decoration: none;">À propos</a></li>
-                        <li><a href="#contact" style="color: white; text-decoration: none;">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-services">
-                    <h4>Nos services</h4>
-                    <ul style="list-style: none; margin-top: 10px;">
-                        <li><a href="#services" style="color: white; text-decoration: none;">Sites vitrines</a></li>
-                        <li><a href="#services" style="color: white; text-decoration: none;">Design infographique</a></li>
-                        <li><a href="#services" style="color: white; text-decoration: none;">Solutions sur mesure</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2026 . Tous droits réservés.</p>
-            </div>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">Projets livrés</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Clients satisfaits</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">24h</span>
+        <span class="stat-label">Délai de réponse</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag">Ce que nous faisons</div>
+      <h2>Nos services</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up fade-up-delay-1">
+        <div class="service-icon icon-web"><i class="fas fa-laptop-code"></i></div>
+        <h3>Création de sites vitrines</h3>
+        <p>Sites modernes, responsives et optimisés pour les moteurs de recherche. Une présence en ligne professionnelle qui convertit vos visiteurs en clients.</p>
+        <div class="service-tags">
+          <span class="tag">Responsive</span>
+          <span class="tag">SEO</span>
+          <span class="tag">Hébergement</span>
+          <span class="tag">Maintenance</span>
         </div>
-    </footer>
-<a class="aera" 
-    href="https://wa.me/2250576293783?text=Bonjour%20KoDe-L%20Dev,%20je%20suis%20intéressé%20par%20vos%20services" 
-    target="_blank" 
-    aria-label="Contacter Ste-Dev sur WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-</a>
+      </div>
+      <div class="service-card fade-up fade-up-delay-2">
+        <div class="service-icon icon-design"><i class="fas fa-palette"></i></div>
+        <h3>Design infographique</h3>
+        <p>Identité visuelle complète, logos et supports de communication percutants qui reflètent vos valeurs et marquent les esprits.</p>
+        <div class="service-tags">
+          <span class="tag">Identité visuelle</span>
+          <span class="tag">Logos</span>
+          <span class="tag">Infographies</span>
+          <span class="tag">Print</span>
+        </div>
+      </div>
+      <div class="service-card fade-up fade-up-delay-3">
+        <div class="service-icon icon-custom"><i class="fas fa-layer-group"></i></div>
+        <h3>Solutions sur mesure</h3>
+        <p>Développement spécifique adapté à vos besoins. Analyse, conception et accompagnement complet de A à Z pour chaque projet.</p>
+        <div class="service-tags">
+          <span class="tag">Analyse</span>
+          <span class="tag">Sur mesure</span>
+          <span class="tag">Formation</span>
+          <span class="tag">Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="apropos">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-up">
+        <div class="section-tag">Qui sommes-nous</div>
+        <h2>À propos de<br>KoDe-L Dev</h2>
+        <div class="about-text" style="margin-top:24px">
+          <p>Fondée en 2026, KoDe-L Dev est une agence spécialisée dans la création de sites vitrines et le design infographique, basée à Abidjan, Côte d'Ivoire.</p>
+          <p>Nous combinons expertise technique et créativité pour concevoir des solutions web qui correspondent parfaitement à vos objectifs et à votre identité de marque.</p>
+          <p>Notre équipe passionnée s'engage à vous fournir un service de qualité avec un suivi personnalisé tout au long de votre projet.</p>
+        </div>
+        <div class="skills">
+          <div class="skill-row">
+            <div class="skill-header">
+              <span class="skill-name">Développement Web</span>
+              <span class="skill-pct">95%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-header">
+              <span class="skill-name">Design Graphique</span>
+              <span class="skill-pct">90%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-header">
+              <span class="skill-name">Expérience Utilisateur</span>
+              <span class="skill-pct">85%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-header">
+              <span class="skill-name">Optimisation SEO</span>
+              <span class="skill-pct">80%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="80"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-aside fade-up fade-up-delay-1">
+        <div class="about-featured">
+          <div class="af-badge">Notre engagement</div>
+          <h3>Des résultats mesurables</h3>
+          <p>Chaque projet est conçu avec un objectif clair : maximiser votre visibilité et convertir vos visiteurs en clients fidèles.</p>
+        </div>
+        <div class="about-stats-grid">
+          <div class="about-stat">
+            <span class="about-stat-num">50+</span>
+            <span class="about-stat-label">Sites livrés</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">3</span>
+            <span class="about-stat-label">Services clés</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">2026</span>
+            <span class="about-stat-label">Fondée en</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">ABJ</span>
+            <span class="about-stat-label">Abidjan, CI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:48px">
+      <div class="section-tag">Parlons de votre projet</div>
+      <h2>Contactez-nous</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-up">
+        <p style="font-size:15px;margin-bottom:0">Nous sommes disponibles pour échanger sur votre projet et vous proposer une solution adaptée à vos besoins et votre budget.</p>
+        <div class="contact-info-items">
+          <div class="contact-item-row">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h4>Adresse</h4>
+              <p><a href="https://maps.app.goo.gl/kP7Q8nmuh4e5kNps9">Quartier Triangle, </a><span>Cocody, Riviera 3 — Abidjan</span></p>
+            </div>
+          </div>
+          <div class="contact-item-row">
+            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+            <div>
+              <h4>Téléphone</h4>
+              <a href="tel:+2250502432302">+225 05 02 43 23 02</a><br>
+              <a href="tel:+2250759582002" style="margin-top:3px;display:inline-block">+225 07 59 58 20 02</a>
+            </div>
+          </div>
+          <div class="contact-item-row">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h4>Email</h4>
+              <a href="mailto:kodeldev@gmail.com">Kodeldev@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/kodeldev" target="_blank" class="social-btn" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/2250576293783" target="_blank" class="social-btn" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <div class="footer-logo-icon"><i class="fas fa-code"></i></div>
+          <span>KoDe-L <b>Dev</b></span>
+        </a>
+        <p>Agence digitale créative basée à Abidjan. Création de sites vitrines & design infographique.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#apropos">À propos</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Sites vitrines</a></li>
+          <li><a href="#services">Design infographique</a></li>
+          <li><a href="#services">Solutions sur mesure</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+2250502432302">+225 05 02 43 23 02</a></li>
+          <li><a href="mailto:kodeldev@gmail.com">Kodeldev@gmail.com</a></li>
+          <li><a href="https://www.instagram.com/kodeldev" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 KoDe-L Dev — Tous droits réservés</span>
+      <div class="footer-bottom-links">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    // === THEME SOMBRE ===
-    const themeBtn = document.getElementById("themeBtn");
-    themeBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark");
-        localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
-    });
+// Header scroll
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+});
 
-    // Charger le thème sauvegardé
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark");
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
+
+// Scroll animations
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     }
+  });
+}, { threshold: 0.1 });
+fadeEls.forEach(el => observer.observe(el));
 
-    // === SIDEBAR / MENU MOBILE ===
-    const sidebar = document.querySelector('.sidebar');
-    const menuIcon = document.querySelector('.menu-icon');
-
-    function toggleMenu() {
-        sidebar.classList.toggle('active');
-        menuIcon.classList.toggle('active');
+// Skill bars animation
+const skillFills = document.querySelectorAll('.skill-fill');
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const width = entry.target.getAttribute('data-width');
+      entry.target.style.width = width + '%';
+      skillObserver.unobserve(entry.target);
     }
+  });
+}, { threshold: 0.3 });
+skillFills.forEach(el => skillObserver.observe(el));
 
-    menuIcon.addEventListener("click", toggleMenu);
-
-    // === ANIMATION SERVICES ===
-    const cards = document.querySelectorAll('.service-card');
-    const servicesObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animationPlayState = "running";
-            }
-        });
-    }, { threshold: 0.2 });
-
-    cards.forEach(card => {
-        card.style.animationPlayState = "paused";
-        servicesObserver.observe(card);
-    });
-
-    // === ANIMATION ABOUT ===
-    const aboutElements = document.querySelectorAll("#apropos p, #apropos .skill-item");
-    const aboutObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.classList.add("appear");
-
-                // Animation des barres de compétence
-                if(entry.target.classList.contains("skill-item")){
-                    const level = entry.target.querySelector(".skill-level");
-                    if(level){
-                        const width = level.getAttribute("style").match(/width:\s*(\d+)%/)[1];
-                        level.style.width = width + "%";
-                    }
-                }
-
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    aboutElements.forEach(el => aboutObserver.observe(el));
-
-    // === ANIMATION CONTACT ===
-    const contactContainer = document.querySelector(".contact-container");
-    const contactItems = document.querySelectorAll(".contact-info, .contact-item, .social-links a");
-
-    const contactObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                if(contactContainer){ contactContainer.classList.add("rotate-in"); }
-                contactItems.forEach(el => el.classList.add("appear"));
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.2 });
-
-    contactItems.forEach(el => contactObserver.observe(el));
+// Active nav link
+const sections = document.querySelectorAll('section[id], div[id="accueil"]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent-dark)' : '';
+  });
 });
 </script>
 </body>
 </html>
-
